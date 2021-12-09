@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 29-Nov-2021 05:47:31
+% Last Modified by GUIDE v2.5 09-Dec-2021 09:11:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -88,135 +88,60 @@ imshow(handles.I);
 title('\color{white}Vaccination Card');
 
 %----------------------------------------------------------------
-%Read the card
-handles.BW =im2bw(handles.I, 0.7);
+%----------resize image-------------
+B = imresize(handles.I,[1180 1700]);
 
-%I = imread('sinopharm2.jpg');
-%imtool(P);
-
-
-
-
-%[m,n,l] = size(BW);
+%----------convert to binary image-------------
+handles.BW =im2bw(B, 0.7);
 BW=handles.BW;
-%A = BW(1:m,110:1500,:);
-%rows_num(i)=sum(k2(i,:)); 
-% find the minimummvalue of rows_num, decided the i(row number)
-%imshow(A);
 
+%----------- Check 1st Dose --------------------
 
-for row=180:400
-    sum = 0;
-    for col=250:650
-        pixelValue = BW(row, col); % If it's a gray scale image.
-        sum = sum + pixelValue;
-        if(pixelValue ~= 0)
-            continue;
-        end
-    end
-    if(sum == 0)
-        R1 = row; 
-        break;
-    end
-end
+D1_R1 = CheckBlackRow(BW,180,400,200,650);
 
-a = R1+10;
-for row=a:375
-    sum = 0;
-    for col=250:650
-        pixelValue = BW(row, col); % If it's a gray scale image.
-        sum = sum + pixelValue;
-        if(pixelValue ~= 0)
-            continue;
-        end
-        
-    end
-    if(sum == 0)
-        R2 = row; 
-        break;
-    end
-end
+D1_R2 = CheckBlackRow(BW,(D1_R1+10),400,200,650);
 
-for col=250:650
-    sum = 0;
-    for row=R1:400
-        pixelValue = BW(row, col); % If it's a gray scale image.
-        sum = sum + pixelValue;
-        if(pixelValue ~= 0)
-            continue;
-        end
-        
-    end
-    if(sum == 0)
-        C1 = col;  
-        break;
-    end
-end
+D1_C1 = CheckBlackColumn(BW,200,650,D1_R1,400);
 
-b = C1+10;
-for col=b:650
-    sum = 0;
-    for row=R1:400
-        pixelValue = BW(row, col); % If it's a gray scale image.
-        sum = sum + pixelValue;
-        if(pixelValue ~= 0)
-            continue;
-        end
-       
-    end
-    if(sum == 0)
-        C2 = col;  
-        break;
-    end
-end
+D1_C2 = CheckBlackColumn(BW,(D1_C1+10),650,D1_R1,400);
 
-%fprintf('%d %d %d %d \n',R1,R2,C1,C2);
+vacc_1 = BW(D1_R1+10:D1_R2-10,D1_C1+10:D1_C2-10);
 
-crop_image = BW(R1:R2,C1:C2);
+ %imshow(vacc_1);
 
-%imshow(crop_image);
-
-[m,n] = size(crop_image);
-
-y=floor(m/2);
-
-
-vacc_1 = crop_image(10:y-10,10:n-10);
-%imshow(vacc_1);
-vacc_2 = crop_image(y+10:m-10,10:n-10);
-%imshow(vacc_2);
+[m,n] = size(vacc_1);
 
 vacc_1 = ~vacc_1;
-vacc_2 = ~vacc_2;
 
 [L1, letters_1] = bwlabel(vacc_1,8);
-%imshow(vacc_1);
-%hold on;
-% Trace the boundaries of the coins
-%[B,L] = bwboundaries(vacc_1,'noholes');
-%for i = 1:length(B)
- %   boundary = B{i};
- %   plot(boundary(:,2), boundary(:,1), 'blue', 'LineWidth', 3)
-%end
-
-[L2, letters_2] = bwlabel(vacc_2,8);
-%imshow(vacc_2);
-%hold on;
-% Trace the boundaries of the coins
-%[B,L] = bwboundaries(vacc_2,'noholes');
-%for i = 1:length(B)
-%   boundary = B{i};
- %   plot(boundary(:,2), boundary(:,1), 'blue', 'LineWidth', 3)
-%end
 
 fprintf('%d\n',letters_1);
 if(letters_1 > 0)
     fprintf('Yes Dose 1\n');
     str = 'Yes Dose 1';
 else
-    printf('No Dose 1\n');
-    str = 'No Dose 1';
+    fprintf('No Dose 1\n');
+     str = 'No Dose 1';
 end
+
+%----------- Check 2nd Dose --------------------
+
+D2_R1=CheckBlackRow(BW,D1_R2,400,200,650);
+
+D2_R2=CheckBlackRow(BW,(D1_R2+10),400,200,650);
+
+D2_C1=CheckBlackColumn(BW,200,650,D1_R2,400);
+
+D2_C2=CheckBlackColumn(BW,(D1_C1+10),650,D1_R2,400);
+
+vacc_2 = BW(D2_R1+10:D2_R2-10,D2_C1+10:D2_C2-10);
+
+
+[m,n] = size(vacc_2);
+
+vacc_2 = ~vacc_2;
+
+[L1, letters_2] = bwlabel(vacc_2,8);
 
 fprintf('%d\n',letters_2);
 if(letters_2 > 0)
@@ -226,6 +151,9 @@ else
     fprintf('No Dose 2\n');
     str = 'No Dose 2';
 end
+
+%-----------------------------------------------------
+
 set(handles.txtVacc, 'string', str);
 guidata(hObject,handles);
 
@@ -236,11 +164,6 @@ function txtVacc_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of txtVacc as text
 %        str2double(get(hObject,'String')) returns contents of txtVacc as a double
-
-
-
-
-
 
 % --- Executes during object creation, after setting all properties.
 function txtVacc_CreateFcn(hObject, eventdata, handles)
