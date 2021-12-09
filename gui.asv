@@ -62,7 +62,6 @@ guidata(hObject, handles);
 % uiwait(handles.figure1);
 set(handles.axesImage,'Visible','off');
 set(handles.txtVacc,'Visible','off');
-set(handles.txtName,'Visible','off');
 
 % --- Outputs from this function are returned to the command line.
 function varargout = gui_OutputFcn(hObject, eventdata, handles) 
@@ -82,7 +81,6 @@ var = strcat(pathname,filename);
 
 set(handles.axesImage,'Visible','on');
 set(handles.txtVacc,'Visible','on');
-set(handles.txtName,'Visible','on');
 
 handles.I = imread(var);
 axes(handles.axesImage);
@@ -119,11 +117,11 @@ vacc_1 = ~vacc_1;
 
 fprintf('%d\n',letters_1);
 if(letters_1 > 0)
-    %fprintf('Yes Dose 1\n');
-    str = '!\nOnly 1st Dose';
+    fprintf('Yes Dose 1\n');
+    str = 'Yes Dose 1';
 else
-    %fprintf('No Dose 1\n');
-     str = 'Not vaccinated';
+    fprintf('No Dose 1\n');
+     str = 'No Dose 1';
 end
 
 %----------- Check 2nd Dose --------------------
@@ -147,16 +145,16 @@ vacc_2 = ~vacc_2;
 
 fprintf('%d\n',letters_2);
 if(letters_2 > 0)
-    %fprintf('Yes Dose 2\n');
-    str = 'Vaccinated';
+    fprintf('Yes Dose 2\n');
+    str = 'Yes Dose 2';
+else
+    fprintf('No Dose 2\n');
+    str = 'No Dose 2';
 end
-
-set(handles.txtVacc, 'string', str);
 
 %-----------------------------------------------------
 v = detectColor(handles.I);
-set(handles.txtName, 'string', v);
-
+set(handles.txtVacc, 'string', str);
 guidata(hObject,handles);
 
 function txtVacc_Callback(hObject, eventdata, handles)
