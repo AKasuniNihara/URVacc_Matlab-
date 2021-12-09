@@ -109,20 +109,13 @@ D1_C2 = CheckBlackColumn(BW,(D1_C1+10),650,D1_R1,400);
 
 vacc_1 = BW(D1_R1+10:D1_R2-10,D1_C1+10:D1_C2-10);
 
- %imshow(vacc_1);
-
-[m,n] = size(vacc_1);
-
 vacc_1 = ~vacc_1;
 
 [L1, letters_1] = bwlabel(vacc_1,8);
 
-fprintf('%d\n',letters_1);
 if(letters_1 > 0)
-    %fprintf('Yes Dose 1\n');
-    str = '!\nOnly 1st Dose';
+    str = '! Only 1st Dose';
 else
-    %fprintf('No Dose 1\n');
      str = 'Not vaccinated';
 end
 
@@ -138,16 +131,11 @@ D2_C2=CheckBlackColumn(BW,(D1_C1+10),650,D1_R2,400);
 
 vacc_2 = BW(D2_R1+10:D2_R2-10,D2_C1+10:D2_C2-10);
 
-
-[m,n] = size(vacc_2);
-
 vacc_2 = ~vacc_2;
 
 [L1, letters_2] = bwlabel(vacc_2,8);
 
-fprintf('%d\n',letters_2);
 if(letters_2 > 0)
-    %fprintf('Yes Dose 2\n');
     str = 'Vaccinated';
 end
 
@@ -179,22 +167,4 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function txtName_Callback(hObject, eventdata, handles)
-% hObject    handle to txtVacc (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of txtVacc as text
-%        str2double(get(hObject,'String')) returns contents of txtVacc as a double
-
-% --- Executes during object creation, after setting all properties.
-function txtName_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to txtVacc (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
