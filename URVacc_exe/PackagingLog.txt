@@ -1,0 +1,33 @@
+ant:
+<ant>
+  <mkdir dir="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_redistribution" />
+  <mkdir dir="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_testing" />
+  <mkdir dir="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_redistribution_files_only" />
+</ant>
+mcc -C -o URVacc -W WinMain:URVacc -T link:exe -d 'C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_testing' -v 'C:\Users\MyPc\Desktop\Image Processing Project\URVacc\gui.m' -a 'C:\Users\MyPc\Desktop\Image Processing Project\URVacc\gui.fig' 
+Compiler version: 6.0 (R2015a)
+Dependency analysis by REQUIREMENTS.
+[Warning: Adding path "C:\Users\MyPc\Desktop\Image Processing Project\URVacc" to
+Compiler path instance.] 
+Parsing file "C:\Users\MyPc\Desktop\Image Processing Project\URVacc\gui.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 10 temporary MEX authorization files.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8829758_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8810931_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d881706_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8826354_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8821255_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8827569_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8816361_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d882509_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8813548_7560.auth'.
+Removing: 'C:\Users\MyPc\AppData\Local\Temp\mathworks_tmp_01d8817374_7560.auth'.
+Generating file "C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_testing\readme.txt".
+Packaging...
+Adding custom icon C:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\compiler\Resources\default_icon.ico to C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_testing\URVacc.exe.
+Attempting to embed the CTF archive into the application C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_testing\URVacc.exe.
+Finished embedding CTF archive. Deleting the external CTF archive.
+Creating the bundle...
+Web based installer created at C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
+Elapsed packaging time was: 4 minutes and 25 seconds.
