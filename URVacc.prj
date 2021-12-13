@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1942854066" file="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc.prj" location="C:\Users\MyPc\Desktop\Image Processing Project\URVacc" name="URVacc" preferred-package-location="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="4279218975" file="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc.prj" location="C:\Users\MyPc\Desktop\Image Processing Project\URVacc" name="URVacc" preferred-package-location="C:\Users\MyPc\Desktop\Image Processing Project\URVacc\URVacc\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>URVacc</param.appname>
     <param.icon />
     <param.icons />
@@ -8,8 +8,8 @@
     <param.email />
     <param.company />
     <param.summary />
-    <param.description>Identify the people who were vaccinated</param.description>
-    <param.screenshot>${PROJECT_ROOT}\Presentation\Icons\logo2.png</param.screenshot>
+    <param.description />
+    <param.screenshot>C:\Users\MyPc\Desktop\Image Processing Project\Logo\Presentation1.png</param.screenshot>
     <param.guid />
     <param.net.saved.interface />
     <param.installpath.string>\URVacc\</param.installpath.string>
@@ -46,6 +46,7 @@
       <param.email />
       <param.company />
       <param.summary />
+      <param.description />
       <param.guid />
       <param.net.saved.interface />
       <param.installpath.string />

@@ -91,6 +91,7 @@ title('\color{white}Vaccination Card');
 
 %----------------------------------------------------------------
 %----------resize image-------------
+
 B = imresize(handles.I,[1180 1700]);
 
 %----------convert to binary image-------------
@@ -142,6 +143,7 @@ end
 set(handles.txtVacc, 'string', str);
 
 %-----------------------------------------------------
+
 v = detectColor(handles.I);
 set(handles.txtName, 'string', v);
 

@@ -7,8 +7,6 @@ function vaccine = detectColor(I)
     Fr = im2bw(Fr, 0.1);
     
     [Lr, obj_r] = bwlabel(Fr,8);
-    
-    
 
 % identify green components
     G = I(:,:,2);
@@ -17,6 +15,20 @@ function vaccine = detectColor(I)
     Fg = im2bw(Fg, 0.1);
    
     [Lg, obj_g] = bwlabel(Fg,8);
+
+%------------------------------    
+flag = 1;
+for row = 100:500
+    for col = 100:500
+        if(I(row,col,1)>200 && I(row,col,2)>200 && I(row,col,3)<50)
+            vaccine = 'Moderna';
+            flag = 0;
+            break;
+        end
+    end
+end
+
+if(flag == 1 )
     
     if(obj_r > 0)
     %fprintf('Sinopharm\n');
@@ -27,3 +39,4 @@ function vaccine = detectColor(I)
     else
         vaccine = '?';
     end
+end
