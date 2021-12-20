@@ -16,7 +16,7 @@ function vaccine = detectColor(I)
    
     [Lg, obj_g] = bwlabel(Fg,8);
 
-%------------------------------    
+%----------Identify yellow components--------------------    
 flag = 1;
 for row = 100:500
     for col = 100:500
